@@ -64,26 +64,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.img-loader.component {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  .loading {
-    position: absolute;
-  }
-  .img-container {
-    transition: width .2s;
-    width: 100%;
-    height: 100%;
-    &.is-animated {
-      width: 0;
-    }
-    &.is-loaded {
-      width: 100%;
-    }
-  }
+img {
+    opacity: 0.4;
+}
+img:hover {
+    opacity: 1.0;
+                  transition: opacity .55s ease-in-out;
+                  -moz-transition: opacity .55s ease-in-out;
+                  -webkit-transition: opacity .55s ease-in-out;
 }
 </style>

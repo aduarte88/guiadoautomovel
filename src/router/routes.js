@@ -1,12 +1,8 @@
-// profile
-import profilePage from '../pages/profile/ProfilePage.vue'
-import profilePostsPage from '../pages/profile/ProfilePostsPage.vue'
+
 
 // single pages
 import homePage from '../pages/Home.vue'
-import newsPage from '../pages/news/NewsPage.vue'
-import newsPage2 from '../pages/news/NewsPage2.vue'
-import loginPage from '../pages/Login.vue'
+import carsDetail from '../pages/cars/CarsDetail.vue'
 import notFoundPage from '../pages/NotFound.vue'
 
 import { routePropResolver } from './util'
@@ -20,37 +16,13 @@ export const routes = [
     meta: { title: `${DOMAIN_TITLE} | home` }
   },
   {
-    path: '/news',
-    name: 'news',
-    component: newsPage,
-    meta: { title: `${DOMAIN_TITLE} | news` },
+    path: '/cars/:id',
+    name: 'cars',
+    component: carsDetail,
+    meta: { title: `${DOMAIN_TITLE} | cars` },
     props: routePropResolver
   },
-  {
-    path: '/news2/:id',
-    name: 'news2',
-    component: newsPage2,
-    meta: { title: `${DOMAIN_TITLE} | news2` },
-    props: routePropResolver
-  },
-  {
-    path: '/profile',
-    component: profilePage,
-    meta: { isAuth: true, title: `${DOMAIN_TITLE} | profile` },
-    children: [
-      {
-        path: '',
-        name: 'profile',
-        component: profilePostsPage
-      }
-    ]
-  },
-  {
-    path: '/login',
-    name: 'login',
-    component: loginPage,
-    meta: { title: `${DOMAIN_TITLE} | login` }
-  },
+
   {
     path: '*',
     component: notFoundPage,

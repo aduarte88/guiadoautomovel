@@ -1,111 +1,102 @@
 <template>
-  <div class="home page">
-    <h1>{{ msg }}</h1>
-    <button @click="isShownModal = true">show modal</button>
-    <button @click="showToast">show toast</button>
-    <UiModal closeOnOverlay :show.sync="isShownModal">
-      <div class="some-modal-content">
-        hi here
-        <div class="buttons">
-          <button @click="submitModalHandler">ok</button>
+      
+      <DataBox :loading="loading" :isEmpty="isEmpty" :error="error">
+       
+        <div class="item" v-for="(car,index) in cars" :key="car.id">
+
+          <div :class="getCarClass(index)">
+        
+            <div class="meta">
+              <div class="photo" v-bind:style="{ 'background-image': 'url(' + car.photo + ')' }">
+              
+              </div>
+              <ul class="details">
+                <li class="author">{{car.author}}</li>
+                <li class="tags">Views: {{getRandomNumber()}}</li>
+                 
+              </ul>
+            </div>
+            <div class="description">
+              <h1>{{car.subTitle}}</h1>
+              <h2>{{car.title}}</h2>
+              <p> {{car.body}}</p>
+              <p class="read-more">
+                 <router-link :to="{ name: 'cars', params: { id: car.id } }">Read More</router-link>
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
-    </UiModal>
+      </DataBox>
 
-    <UiBaseIcon width="40px" height="40px" color="blue" iconName="done" @click="onClickIcon"/>
-
-    <UiInputText
-      v-model="msg"
-      placeholder="Enter message"
-      label="Enter message"
-      someHelloProp="hello"
-      @blur="onBlur"
-      @keyup.enter="onEnter"
-      @keyup.esc="onEsc"
-      :error="inputError">
-      <div slot="before">
-        <UiBaseIcon iconName="done"/>
-      </div>
-      <div slot="after">
-        <UiBaseIcon iconName="write"/>
-      </div>
-      <div slot="bottom">This is very important description</div>
-    </UiInputText>
-
-    <UiCheckbox value="hello checkbox" v-model="checkboxState"/>
-
-    <br><br>
-    <UiPaginationOffset :offset.sync="pagination.offset" :limit="pagination.limit" :total="pagination.total"/>
-
-  </div>
 </template>
 
 <script>
-import UiModal from '@/components/UiModal.vue'
-import UiBaseIcon from '@/components/icons/UiBaseIcon.vue'
-import UiInputText from '@/components/UiInputText.vue'
-import UiCheckbox from '@/components/UiCheckbox.vue'
-import UiPaginationOffset from '../components/UiPaginationOffset'
+import { mapState, mapGetters } from 'vuex'
+
+import prepareQueryParamsMixin from '../mixins/prepareQueryParamsMixin'
+import prepareFetchParamsMixin from '../mixins/prepareFetchParamsMixin'
+
+import DataBox from '../components/DataBox'
+import UiImgLoader from '../components/UiImgLoader'
 
 export default {
-  name: 'IndexPage',
-
+  name: 'NewsPage',
+  mixins: [prepareQueryParamsMixin, prepareFetchParamsMixin],
   components: {
-    UiModal,
-    UiBaseIcon,
-    UiInputText,
-    UiCheckbox,
-    UiPaginationOffset
-  },
-
-  data () {
-    return {
-      msg: 'Welcome to Index!!!',
-      isShownModal: false,
-      inputError: false,
-      checkboxState: false,
-
-      pagination: {
-        limit: 20,
-        offset: 0,
-        total: 60
-      }
-    }
+    DataBox
   },
 
   methods: {
-    showToast () {
-      console.log('aaa')
-      this.$store.commit('toast/NEW', { type: 'success', message: 'hello' })
+    fetchData () {
+      this.$store.dispatch('cars/getAll', { params: this.fetchParams })
     },
-    submitModalHandler () {
-      // some logic
-      this.isShownModal = false
+    getRandomNumber(){
+      return Math.ceil(Math.random() * 1000);
     },
-    onBlur () {
-      console.log('onBlur!!!')
-    },
-    onEnter () {
-      console.log('onEnter!!!')
-    },
-    onEsc () {
-      console.log('onEsc!!!')
-    },
-    onClickIcon () {
-      console.log('onClickIcon!!!!')
+    getCarClass(index){
+      return index+1 & 1 ? 'car-card alt' : 'car-card'; 
     }
+  },
+
+  computed: {
+    ...mapState('cars', {
+      cars: 'cars',
+      //pagination: 'pagination',
+      error: 'error',
+      loading: 'loading'
+    }),
+    ...mapGetters('cars', [
+      'isEmpty'
+    ]),
+    useInUrlQueryPropList () {
+      /*
+      return this.prepareQueryParamsMixin({
+        limit: this.pagination.limit,
+        page: this.pagination.page
+      })
+      */
+    },
+    fetchParams () {
+      /*
+      const pagination = this.prepareFetchParamsMixin({
+        limit: this.pagination.limit,
+        page: this.pagination.page
+      })
+
+      return { ...pagination }
+      */
+    }
+  },
+
+  created () {
+    this.fetchData()
+    
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.some-modal-content {
-  min-width: 400px;
-  padding: 25px;
 
-  .buttons button {
-    padding: 10px;
-    margin: 10px;
-  }
-}
+
+
 </style>

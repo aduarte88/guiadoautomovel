@@ -1,15 +1,22 @@
 <template>
-  <div class="news page">
-    <div>
-      <h1>{{ newsText }}</h1>
-      <br><br>
-    </div>
-    <div class="news-list">
-        {{news}}
-    
-    </div>
+      
+     <div class="car-card alt">
+            <div class="meta">
+              <div class="photo" v-bind:style="{ 'background-image': 'url(' + carDetail.photo + ')' }">
+                </div>
+              <ul class="details">
+                 <li class="author">{{carDetail.author}}</li>
+              </ul>
+            </div>
+            <div class="description">
+             <h1>{{carDetail.subTitle}}</h1>
+              <h2>{{carDetail.title}}</h2>
+              <p> {{carDetail.body}}{{carDetail.body}}{{carDetail.body}}{{carDetail.body}}</p>
+              
+            </div>
+          </div>
 
-  </div>
+
 </template>
 
 <script>
@@ -27,37 +34,7 @@ export default {
     DataBox
   },
 
-  props: {
-    limit: { type: Number },
-    page: { type: Number }
-  },
 
-  watch: {
-    'pagination.limit': function () {
-      this.$router.replace({
-        query: this.useInUrlQueryPropList
-      })
-      this.fetchData()
-    },
-    'pagination.page': function () {
-      this.$router.replace({
-        query: this.useInUrlQueryPropList
-      })
-      this.fetchData()
-    },
-    limit: {
-      handler: function (newVal) {
-        this.$store.commit('news/SET_PAGINATION', { limit: newVal })
-      },
-      immediate: true
-    },
-    page: {
-      handler: function (newVal) {
-        this.$store.commit('news/SET_PAGINATION', { page: newVal })
-      },
-      immediate: true
-    }
-  },
 
   data () {
     return {
@@ -67,49 +44,53 @@ export default {
 
   methods: {
     fetchData () {
-      this.$store.dispatch('news/getListPublicById', { params: this.fetchParams })
+      this.$store.dispatch('carDetail/getById', { params: this.fetchParams })
     }
   },
    
   computed: {
       
-    ...mapState('news', {
-      news: 'items2',
-      pagination: 'pagination',
+    ...mapState('carDetail', {
+      carDetail: 'carDetail',
+     // pagination: 'pagination',
       error: 'error',
       loading: 'loading'
     }),
-    ...mapGetters('news', [
+    ...mapGetters('carDetail', [
       'isEmpty'
     ]),
     useInUrlQueryPropList () {
+      /*
       return this.prepareQueryParamsMixin({
         limit: this.pagination.limit,
         page: this.pagination.page
       })
+      */
     },
     fetchParams () {
+      /*
       const pagination = this.prepareFetchParamsMixin({
         limit: this.pagination.limit,
         page: this.pagination.page
       })
+      */
       const params = {
           id: this.$route.params.id
       }
 
       return params
+      
     }
   },
 
   created () {
-      console.log("ID: "+this.$route.params.id)
     this.fetchData()
   }
 }
 </script>
 
 <style lang="scss" scoped>
-img:hover{
- // width: 50px;
-}
+
+
+
 </style>

@@ -44,7 +44,9 @@ export default class BaseService {
           console.log(response.data);
 
           response.data.map((obj) => {
-            obj.photo = 'https://via.placeholder.com/250';
+            obj.photo = 'https://live.staticflickr.com/65535/48973372111_cd2bc45cc5_c.jpg';
+            obj.subTitle = 'Lorem ipsum dolor';
+            obj.author = 'Aquiles Pinto'
             // or via brackets
             // obj['total'] = 2;
             return obj;
@@ -70,14 +72,21 @@ export default class BaseService {
     return new Promise((resolve, reject) => {
       return this.request().get(`${this.entity}/${id}`)
       .then(response => {
-        console.log("----------");
-        console.log(response);
-        console.log("----------");
+
+
+          response.data.photo = 'https://live.staticflickr.com/65535/48973372111_cd2bc45cc5_c.jpg';
+          response.data.subTitle = 'Lorem ipsum dolor';
+          response.data.author = 'Aquiles Pinto'
+
+
+      
        
         resolve(this.responseWrapper(response, response.data))
       })
         .catch(error => {
+          console.log("error");
           console.log(error);
+          console.log("------");
           let message = error.response.data ? error.response.data.error : error.response.statusText
           reject(this.errorWrapper(error, message))
         })

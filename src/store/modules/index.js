@@ -1,15 +1,15 @@
-import auth from './auth'
-import user from './user'
 import dom from './dom'
 import toast from './toast'
-import news from './news'
-import profilePosts from './profilePosts'
+import cars from './cars'
+import carDetail from './carDetail'
+
 
 export default {
-  auth,
-  user,
+
   dom,
   toast,
-  news,
-  profilePosts
+  cars,
+  carDetail
+  
+
 }
