@@ -16,7 +16,6 @@ export function routePropResolver (routeOptions) {
       resultQuery[key] = +query[key]
     }
   })
-  console.log(resultQuery);
   return resultQuery
 }
 

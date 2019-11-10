@@ -61,7 +61,6 @@ export default {
   computed: {
     ...mapState('cars', {
       cars: 'cars',
-      //pagination: 'pagination',
       error: 'error',
       loading: 'loading'
     }),
@@ -69,22 +68,10 @@ export default {
       'isEmpty'
     ]),
     useInUrlQueryPropList () {
-      /*
-      return this.prepareQueryParamsMixin({
-        limit: this.pagination.limit,
-        page: this.pagination.page
-      })
-      */
+  
     },
     fetchParams () {
-      /*
-      const pagination = this.prepareFetchParamsMixin({
-        limit: this.pagination.limit,
-        page: this.pagination.page
-      })
-
-      return { ...pagination }
-      */
+     
     }
   },
 
@@ -98,32 +85,6 @@ export default {
 <style lang="scss" scoped>
 
 $breakpoint-tablet: 768px;
-
-img:hover{
- // width: 50px;
-}
-
-  .container {
-  margin: auto;
-}
-.text-center {
-  text-align: center;
-}
-.padding {
-  padding: 5px 10px;
-}
-.row {
-  display: flex;
-  // flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-}
-.column {
-  display: flex;
-  flex-direction: column;
-  flex-basis: 100%;
-}
-
 
 $color_white: #fff;
 $color_prime: #5ad67d;
