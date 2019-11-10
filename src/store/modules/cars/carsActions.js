@@ -1,4 +1,4 @@
-import CarsService from '../../../services/posts.service'
+import CarsService from '../../../services/cars.service'
 
 export default {
   

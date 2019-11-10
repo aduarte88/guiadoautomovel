@@ -1,33 +1,27 @@
-<template>
-      
-      <DataBox :loading="loading" :isEmpty="isEmpty" :error="error">
-       
-        <div class="item" v-for="(car,index) in cars" :key="car.id">
-
-          <div :class="getCarClass(index)">
-        
-            <div class="meta">
-              <div class="photo" v-bind:style="{ 'background-image': 'url(' + car.photo + ')' }">
-              
-              </div>
-              <ul class="details">
-                <li class="author">{{car.author}}</li>
-                <li class="tags">Views: {{getRandomNumber()}}</li>
-                 
-              </ul>
-            </div>
-            <div class="description">
-              <h1>{{car.subTitle}}</h1>
-              <h2>{{car.title}}</h2>
-              <p> {{car.body}}</p>
-              <p class="read-more">
-                 <router-link :to="{ name: 'cars', params: { id: car.id } }">Read More</router-link>
-              </p>
-            </div>
+<template>   
+  <DataBox :loading="loading" :isEmpty="isEmpty" :error="error">  
+    <div class="item" v-for="(car,index) in cars" :key="car.id">
+      <div :class="getCarClass(index)">  
+        <div class="meta">
+          <div class="photo" v-bind:style="{ 'background-image': 'url(' + car.photo + ')' }">     
           </div>
+          <ul class="details">
+            <li class="author">{{car.author}}</li>
+            <li class="tags">Views: {{getRandomNumber()}}</li>
+              
+          </ul>
         </div>
-      </DataBox>
-
+        <div class="description">
+          <h1>{{car.subTitle}}</h1>
+          <h2>{{car.title}}</h2>
+          <p> {{car.body}}</p>
+          <p class="read-more">
+              <router-link :to="{ name: 'cars', params: { id: car.id } }">Read More</router-link>
+          </p>
+        </div>
+      </div>
+    </div>
+  </DataBox>
 </template>
 
 <script>
