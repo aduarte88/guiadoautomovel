@@ -1,5 +1,5 @@
-# Real World Vue.js Boilerplate
-This project based on real world practice and ready to use. Have a fun!
+# Guia do Automóvel
+Desafio
 
 ## Features
 - Http request class that implements API calls with Auth and tokens refresh based on Axios
@@ -35,11 +35,7 @@ Images/Fonts/Other media stuff.
 
 ### `components`
 Shared components folder.
-- `DataBox` wrap in this component any received data. It represents loading(spinloader animation), error and empty statuses (examaple in `src/pages/News.vue`).
-- `UiImgLoader` - `img` tag wrapper. Shows image loading(pulseloader animation) status and animate onloading as option.
-- `UiModal` - simple modal window.
-- `PulseLoading` and `SpinnerWave` - loading animation.
-- `UiUploadMulti` and `UiUploadSingle` - file upload example components.
+- `DataBox` wrap in this component any received data. It represents loading(spinloader animation), error and empty statuses (examaple in `src/pages/carsDetail.vue`).
 - ...
 
 ### `config`
@@ -86,7 +82,7 @@ Style files(partials, variables, mixins, reset).
 Data access layer/API calls.
 - ES6 API calls classes.
 - API calls must be represented in separate classes (not in vuex action).
-- `auth.service` - Auth methods and API calls.
+- `cars.service` - API calls.
 - `http.init` - Http request class.
 - `util`:
   - `ResponseWrapper` - Represent response object.
@@ -122,22 +118,11 @@ And use it in template.
 <input type="text" v-model="name" v-debounce="500" @debounce-change="runSomeMethod">
 ```
 
-### Notifications/Toast:
-Just make mutation
-```
-commit('dom/TOAST', { message: 'hello', duration: 2000, type: 'success' })
-```
-
-### Icons/SVG:
-Set up yours svg icons in `src/components/icons/` folder. Modify `UiIconBase.vue` related to yours newly added icons and use it in template.
-```
-<UiIconBase size="40" color="yellow" icon="write"/>
-```
 
 ## Build Setup
 ``` bash
 # clone repo
-git clone https://github.com/zmts/vuejs-boilerplate.git
+git clone https://gitlab.com/a.sobreiroduarte/guiadoautomovel.git
 
 # install dependencies
 npm install
@@ -149,14 +134,3 @@ npm run serve
 npm run build
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
-
-# TODO
-- Integrate strong FLUX architecture
-- Add global loading component
-- Add more examples
-
-# Amazing repos where I found some great approaches:
-- https://github.com/sdras/vue-sample-svg-icons
-- https://github.com/MillerRen/vue-boilerplate
-- https://github.com/vuejs-tips/v-debounce
