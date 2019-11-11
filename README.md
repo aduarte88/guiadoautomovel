@@ -122,7 +122,7 @@ And use it in template.
 ## Build Setup
 ``` bash
 # clone repo
-git clone https://gitlab.com/a.sobreiroduarte/guiadoautomovel.git
+git clone https://github.com/aduarte88/guiadoautomovel.git
 
 # install dependencies
 npm install
